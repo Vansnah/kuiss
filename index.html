@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kuis Komputer Kelas 2</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #a5b4fc, #c7d2fe, #f3f4f6);
+      margin: 0;
+      padding: 20px;
+      color: #111;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(31, 41, 55, 0.2);
+      animation: fadeIn 1s ease;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 10px auto;
+      width: 100px;
+      height: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1f2937;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p.lead {
+      text-align: center;
+      color: #4b5563;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .meta input, .meta select {
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      width: 45%;
+      max-width: 240px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .meta input:focus, .meta select:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+      transform: scale(1.03);
+      outline: none;
+      background: #ffffff;
+    }
+
+    .warning {
+      text-align: center;
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 10px;
+      border-radius: 10px;
+      display: none;
+      margin-bottom: 15px;
+      font-size: 15px;
+      animation: shake 0.3s ease;
+    }
+
+    .question {
+      margin: 18px 0;
+      padding: 15px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s;
+    }
+
+    .question:hover {
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .question p {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    label:hover {
+      background: #eef2ff;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(99,102,241,0.3);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #4f46e5, #4338ca);
+    }
+
+    button.ghost {
+      background: transparent;
+      color: #4f46e5;
+      border: 2px solid #a5b4fc;
+      box-shadow: none;
+    }
+
+    button.ghost:hover {
+      background: rgba(165,180,252,0.2);
+    }
+
+    #score {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #111827;
+      margin-top: 25px;
+      display: none;
+      background: rgba(255,255,255,0.8);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      animation: pop 0.5s ease;
+    }
+    
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img src="poris.png" alt="Logo Sekolah" class="logo">
+  <h1>Kuis Komputer</h1>
+  <h2 style="text-align: center;">Test Kemampuan <b>siswa</b></h2>
+  <p class="lead"> <b style="color: red; font-weight: bold;">Jangan Lupa!!!</b> Isi Nama, Nomor Absen, dan Kelas lalu klik <strong>Selesai</strong></p>
+
+  <div class="meta">
+    <input id="nama" type="text" placeholder="Nama siswa...">
+    <input id="nomor" type="text" placeholder="Nomor absen...">
+    <select id="kelas">
+      <option value="">Pilih Kelas...</option>
+      <option value="2A">2A</option>
+      <option value="2B">2B</option>
+      <option value="2C">2C</option>
+      <option value="2D">2D</option>
+    </select>
+  </div>
+
+  <div id="warning" class="warning"></div>
+
+  <form id="quiz">
+    <div id="soal"></div>
+
+    <div class="controls">
+      <button type="button" id="finishBtn">Selesai</button>
+      <button type="button" class="ghost" id="resetBtn">Ulangi</button>
+    </div>
+  </form>
+
+  <div id="score"></div>
+</div>
+
+<script>
+(function(){
+  const soalContainer = document.getElementById('soal');
+  const finishBtn = document.getElementById('finishBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const scoreBox = document.getElementById('score');
+  const namaEl = document.getElementById('nama');
+  const nomorEl = document.getElementById('nomor');
+  const kelasEl = document.getElementById('kelas');
+  const warning = document.getElementById('warning');
+  const form = document.getElementById('quiz');
+
+  const answers = {
+    q1:'B',q2:'A',q3:'C',q4:'A',q5:'A',q6:'B',q7:'B',q8:'C',q9:'A',q10:'A',
+    q11:'B',q12:'A',q13:'A',q14:'B',q15:'B',q16:'B',q17:'B',q18:'B',q19:'A',q20:'A',
+    q21:'B',q22:'A',q23:'A',q24:'A',q25:'B',q26:'A',q27:'A',q28:'B',q29:'A',q30:'B'
+  };
+
+  const soalList = [
+    ["1. Kepanjangan TIK adalah...", ["A. Bermain bola", "B. Teknologi informasi dan komunikasi", "C. Memasak"]],
+    ["2. Contoh perangkat TIK adalah...", ["A. Komputer", "B. Buku", "C. Pensil"]],
+    ["3. Agar komputer tetap bersih, kita harus...", ["A. Mencucinya dengan air", "B. Membiarkannya berdebu", "C. Membersihkannya dengan kain lembut"]],
+    ["4. Saat mengetik di keyboard, kita harus...", ["A. Menekan dengan lembut", "B. Memukul dengan keras", "C. Membiarkannya saja"]],
+    ["5. Mengapa kita tidak boleh makan di dekat komputer?", ["A. Karena bisa kotor dan rusak", "B. Supaya tidak lapar", "C. Karena komputer takut makanan"]],
+    ["6. Jika komputer rusak, sebaiknya kita...", ["A. Memukulnya", "B. Melapor kepada guru", "C. Membiarkannya"]],
+    ["7. Saat menggunakan mouse, kita harus...", ["A. Mengguncangnya dengan keras", "B. Menggerakkannya pelan", "C. Menekan semua tombol"]],
+    ["8. Agar komputer aman, kita harus...", ["A. Mencabut kabel sembarangan", "B. Menyiram komputer dengan air", "C. Mematikan komputer dengan benar"]],
+    ["9. Apa yang harus dijauhkan dari komputer?", ["A. Air dan panas", "B. Buku dan pensil", "C. Kertas dan penghapus"]],
+    ["10. Contoh perilaku baik saat menggunakan komputer adalah...", ["A. Duduk dengan rapi", "B. Membanting keyboard", "C. Mencoret-coret layar"]],
+    ["11. Perilaku buruk saat menggunakan komputer adalah...", ["A. Melapor jika rusak", "B. Membanting mouse", "C. Menjaga kebersihan"]],
+    ["12. Supaya komputer awet, kita harus...", ["A. Menjaga dan merawatnya", "B. Bermain kasar", "C. Membiarkannya kotor"]],
+    ["13. Kabel komputer tidak boleh dicabut...", ["A. Saat komputer sedang menyala", "B. Setelah dimatikan", "C. Saat komputer dimatikan"]],
+    ["14. Saat tangan kotor, kita sebaiknya...", ["A. Langsung menyentuh komputer", "B. Mencuci tangan dulu", "C. Mengelap di baju"]],
+    ["15. Mengapa kita harus menjaga perangkat TIK?", ["A. Agar cepat rusak", "B. Agar tetap bersih dan awet", "C. Agar tidak bisa digunakan"]],
+    ["16. Apa yang dimaksud dengan internet?", ["A. Jaringan listrik di rumah", "B. Jaringan besar yang menghubungkan banyak komputer di seluruh dunia", "C. Alat untuk bermain game"]],
+    ["17. Contoh penggunaan internet adalah...", ["A. Menyiram tanaman", "B. Mengirim pesan dan menonton video", "C. Menulis di buku"]],
+    ["18. Sinyal seluler dikirim oleh...", ["A. Kurir J&T", "B. Menara seluler milik operator", "C. Televisi"]],
+    ["19. Untuk menggunakan sinyal seluler, kita memerlukan...", ["A. Kartu SIM", "B. Flashdisk", "C. Kartu memori"]],
+    ["20. Sinyal seluler dapat digunakan di luar rumah selama...", ["A. Ada jangkauan menara seluler", "B. Tidak ada listrik", "C. Ponsel dimatikan"]],
+    ["21. Wi-Fi berasal dari...", ["A. Menara seluler", "B. Router yang terhubung ke internet rumah atau sekolah", "C. Satelit luar angkasa"]],
+    ["22. Saat menggunakan Wi-Fi, agar bisa tersambung kita harus...", ["A. Mengetik kata sandi jika diminta", "B. Mematikan Wi-Fi", "C. Makan di restoran"]],
+    ["23. Perbedaan utama Wi-Fi dan sinyal seluler adalah...", ["A. Wi-Fi dipakai di rumah, sinyal seluler bisa dipakai di luar rumah", "B. Wi-Fi lebih lambat", "C. Wi-Fi tidak memerlukan listrik"]],
+    ["24. Apa yang bisa membuat sinyal lemah?", ["A. Router jaraknya sangat jauh", "B. Cuaca cerah", "C. Router dekat jendela"]],
+    ["25. Kualitas sinyal Wi-Fi bisa dilihat dari...", ["A. Warna layar ponsel", "B. Jumlah bar Wi-Fi di perangkat", "C. Jumlah aplikasi yang dibuka"]],
+    ["26. Jika sinyal seluler lemah, sebaiknya...", ["A. Pindah ke tempat lebih tinggi", "B. Mematikan ponsel", "C. Menyimpan ponsel di lemari"]],
+    ["27. Untuk memperkuat sinyal Wi-Fi di rumah, router sebaiknya diletakkan...", ["A. Di tempat terbuka dan tinggi", "B. Di bawah meja", "C. Di dekat kulkas"]],
+    ["28. Salah satu etika dalam menggunakan internet adalah...", ["A. Membagikan kata sandi ke semua orang", "B. Tidak membuka Website dari sumber tidak dikenal", "C. Mengunduh semua aplikasi sembarangan"]],
+    ["29. Apa yang harus dihindari saat menggunakan Wi-Fi publik?", ["A. Melakukan transaksi penting", "B. Menonton video belajar", "C. Mengirim pesan ke teman"]],
+    ["30. Mengapa kita perlu berhati-hati saat memakai internet?", ["A. Agar baterai cepat habis", "B. Agar aman dan tidak terkena penipuan online", "C. Agar sinyal menjadi lemah"]]
+  ];
+
+  soalList.forEach((s, i)=>{
+    const qnum = 'q' + (i+1);
+    const div = document.createElement('div');
+    div.className = 'question';
+    let html = `<p>${s[0]}</p>`;
+    s[1].forEach(opt=>{
+      const val = opt.charAt(0);
+      html += `<label><input type="radio" name="${qnum}" value="${val}"> ${opt}</label>`;
+    });
+    div.innerHTML = html;
+    soalContainer.appendChild(div);
+  });
+
+  function showWarning(msg){
+    warning.textContent = msg;
+    warning.style.display = 'block';
+    warning.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  finishBtn.addEventListener('click', ()=>{
+    const nama = namaEl.value.trim();
+    const nomor = nomorEl.value.trim();
+    const kelas = kelasEl.value.trim();
+
+    if(!nama){ showWarning("Nama belum diisi!"); return; }
+    if(!nomor){ showWarning("Nomor absen belum diisi!"); return; }
+    if(!kelas){ showWarning("Kelas belum dipilih!"); return; }
+
+    // Cek soal yang belum dijawab
+    for(const k in answers){
+      const selected = form.querySelector(`[name="${k}"]:checked`);
+      if(!selected){
+        showWarning("Masih ada jawaban yang belum diisi!");
+        return;
+      }
+    }
+
+    warning.style.display = 'none';
+
+    let score = 0;
+    let total = Object.keys(answers).length;
+    for(const k in answers){
+      const sel = form.querySelector(`[name="${k}"]:checked`);
+      if(sel && sel.value === answers[k]) score++;
+    }
+
+    const nilaiAkhir = Math.round((score / total) * 100);
+
+    scoreBox.innerHTML = `
+      <h2>🎉 Hasil Akhir</h2>
+      <p>Nama: <strong>${nama}</strong></p>
+      <p>Kelas: <strong>${kelas}</strong></p>
+      <p>Skor: <strong>${nilaiAkhir}</strong></p>
+    `;
+    scoreBox.style.display = 'block';
+    form.style.display = 'none';
+    document.querySelector('.meta').style.display = 'none';
+  });
+
+  resetBtn.addEventListener('click', ()=>{
+    form.reset();
+    form.style.display = 'block';
+    document.querySelector('.meta').style.display = 'flex';
+    scoreBox.style.display = 'none';
+    warning.style.display = 'none';
+  });
+})();
+</script>
+</body>
+</html>
